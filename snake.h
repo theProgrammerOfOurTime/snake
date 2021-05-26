@@ -19,7 +19,7 @@ private:
 			this->prevJ = prevJ;
 		}
 	};
-	std::vector <node> teil; // head = teil[0]
+	std::vector <node> tail; // head = tail[0]
 	std::pair<node, node> foods;
 	void initFoods();
 	int size;
