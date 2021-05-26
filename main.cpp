@@ -33,13 +33,13 @@ int main()
         {
             for (int j = 0; j < map.LENGTH; j++)
             {
-                if (map.field[i][j] == '#') { spriteMap.setTextureRect(sf::IntRect(0, 0, 20, 20)); }    //стена
-                if (map.field[i][j] == ' ') { spriteMap.setTextureRect(sf::IntRect(20, 0, 20, 20)); }   //пустая клетка
-                if (map.field[i][j] == 'h') { spriteMap.setTextureRect(sf::IntRect(40, 0, 20, 20)); }   //голова
-                if (map.field[i][j] == 'b') { spriteMap.setTextureRect(sf::IntRect(60, 0, 20, 20)); }   //хвост
-                if (map.field[i][j] == '<') { spriteMap.setTextureRect(sf::IntRect(80, 0, 20, 20)); }   //еда 1
-                if (map.field[i][j] == '>') { spriteMap.setTextureRect(sf::IntRect(100, 0, 20, 20)); }  //еда 2
-                if (map.field[i][j] == 'p') { spriteMap.setTextureRect(sf::IntRect(120, 0, 20, 20)); }  //маршрут
+                if (map.field[i][j] == '#') { spriteMap.setTextureRect(sf::IntRect(0, 0, 20, 20)); }    //СЃС‚РµРЅР°
+                if (map.field[i][j] == ' ') { spriteMap.setTextureRect(sf::IntRect(20, 0, 20, 20)); }   //РїСѓСЃС‚Р°СЏ РєР»РµС‚РєР°
+                if (map.field[i][j] == 'h') { spriteMap.setTextureRect(sf::IntRect(40, 0, 20, 20)); }   //РіРѕР»РѕРІР°
+                if (map.field[i][j] == 'b') { spriteMap.setTextureRect(sf::IntRect(60, 0, 20, 20)); }   //С…РІРѕСЃС‚
+                if (map.field[i][j] == '<') { spriteMap.setTextureRect(sf::IntRect(80, 0, 20, 20)); }   //РµРґР° 1
+                if (map.field[i][j] == '>') { spriteMap.setTextureRect(sf::IntRect(100, 0, 20, 20)); }  //РµРґР° 2
+                if (map.field[i][j] == 'p') { spriteMap.setTextureRect(sf::IntRect(120, 0, 20, 20)); }  //РјР°СЂС€СЂСѓС‚
                 spriteMap.setPosition(i * 20, j * 20);
                 window.draw(spriteMap);
             }
