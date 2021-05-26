@@ -37,11 +37,11 @@ char snake_t::AImove()
 			if (map->field[i][j] == 'p') { map->field[i][j] = ' '; }
 		}
 	}
-	numsField[teil[0].i][teil[0].j] = 1;
+	numsField[tail[0].i][tail[0].j] = 1;
 	numsField[foods.first.i][foods.first.j] = -2;
 	numsField[foods.second.i][foods.second.j] = -2;
 	std::set<std::pair<int, int>> cells;
-	cells.insert(std::make_pair(teil[0].i, teil[0].j));
+	cells.insert(std::make_pair(tail[0].i, tail[0].j));
 	std::vector<std::pair<int, int>> way;
 	if (RecAImove(numsField, cells, 1))
 	{
@@ -124,12 +124,12 @@ snake_t::snake_t(maps* map)
 	this->map = map;
 	int i = (rand() % (this->map->HEIGTH - 2)) + 1;
 	int j = (rand() % (this->map->LENGTH - 5)) + 1;
-	teil.push_back(node(i, j, i, j));
-	this->map->field[teil[0].i][teil[0].j] = 'h';
+	tail.push_back(node(i, j, i, j));
+	this->map->field[tail[0].i][tail[0].j] = 'h';
 	for (int i = 1; i < size; i++)
 	{
-		teil.push_back(node(teil[0].i, teil[0].j + i, teil[0].i, teil[0].j + i));
-		this->map->field[teil[i].i][teil[i].j] = 'b';
+		tail.push_back(node(tail[0].i, tail[0].j + i, tail[0].i, tail[0].j + i));
+		this->map->field[tail[i].i][tail[i].j] = 'b';
 	}
 	initFoods();
 }
@@ -137,47 +137,47 @@ snake_t::snake_t(maps* map)
 bool snake_t::move(char dir)
 {
 	if (dir == 'e') { return false; }
-	teil[0].prevJ = teil[0].j;
-	teil[0].prevI = teil[0].i;
+	tail[0].prevJ = tail[0].j;
+	tail[0].prevI = tail[0].i;
 	if (dir == 'w')
 	{
-		teil[0].i = teil[0].i;
-		teil[0].j = teil[0].j - 1;
+		tail[0].i = tail[0].i;
+		tail[0].j = tail[0].j - 1;
 		
 	}
 	if (dir == 'a')
 	{
-		teil[0].i = teil[0].i - 1;
-		teil[0].j = teil[0].j;
+		tail[0].i = tail[0].i - 1;
+		tail[0].j = tail[0].j;
 	}
 	if (dir == 'd')
 	{
-		teil[0].i = teil[0].i + 1;
-		teil[0].j = teil[0].j;
+		tail[0].i = tail[0].i + 1;
+		tail[0].j = tail[0].j;
 	}
 	if (dir == 's')
 	{
-		teil[0].i = teil[0].i;
-		teil[0].j = teil[0].j + 1;
+		tail[0].i = tail[0].i;
+		tail[0].j = tail[0].j + 1;
 	}
-	if (map->field[teil[0].i][teil[0].j] == '#' || map->field[teil[0].i][teil[0].j] == 'b') { return false; }
+	if (map->field[tail[0].i][tail[0].j] == '#' || map->field[tail[0].i][tail[0].j] == 'b') { return false; }
 	bool food = false;
-	if (map->field[teil[0].i][teil[0].j] == '>' || map->field[teil[0].i][teil[0].j] == '<')
+	if (map->field[tail[0].i][tail[0].j] == '>' || map->field[tail[0].i][tail[0].j] == '<')
 	{
-		teil.push_back(node(teil[size - 1].prevI, teil[size - 1].prevJ, teil[size - 1].prevI, teil[size - 1].prevJ));
+		tail.push_back(node(tail[size - 1].prevI, tail[size - 1].prevJ, tail[size - 1].prevI, tail[size - 1].prevJ));
 		size++;
 		food = true;
 	}
-	map->field[teil[0].i][teil[0].j] = 'h';
+	map->field[tail[0].i][tail[0].j] = 'h';
 	initFoods();
 	for (int i = 1; i < size; i++)
 	{
-		teil[i].prevI = teil[i].i;
-		teil[i].prevJ = teil[i].j;
-		teil[i].i     = teil[i - 1].prevI;
-		teil[i].j     = teil[i - 1].prevJ;
-		map->field[teil[i].i][teil[i].j] = 'b';
+		tail[i].prevI = tail[i].i;
+		tail[i].prevJ = tail[i].j;
+		tail[i].i     = tail[i - 1].prevI;
+		tail[i].j     = tail[i - 1].prevJ;
+		map->field[tail[i].i][tail[i].j] = 'b';
 	}
-	if (food == false) { map->field[teil[size - 1].prevI][teil[size - 1].prevJ] = ' '; }
+	if (food == false) { map->field[tail[size - 1].prevI][tail[size - 1].prevJ] = ' '; }
 	return true;
 }
